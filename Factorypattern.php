@@ -1,6 +1,7 @@
 <?php
 //factory pattern
-//Factory pattern is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+/*Factory pattern is a creational design pattern that provides an interface for creating objects in a superclass, 
+but allows subclasses to alter the type of objects that will be created.*/
 // Product interface
 
 // Step 1: Define an interface for Notification
