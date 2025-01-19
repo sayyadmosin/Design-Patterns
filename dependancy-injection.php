@@ -1,5 +1,6 @@
 <?php
 //dependancy Injection
+//dependancy injection is a procedure where one object supplies the dependancies of another object.
 
 
 class logger{
