@@ -1,39 +1,76 @@
 <?php
 
-class book{
-	
-	private $bookName;
-	Private $bookAuther;
-	
-	public function __construct($book,$auther)
-	{
-		
-		$this->bookName=$book;
-		$this->bookAuther=$auther;
-	}
-	
-	public function getbook(){
-		
-		return "Book is :".$this->bookName." And Auther is : ".$this->bookAuther."<br>";
-	}
-		
-}
 
-class bookFactory{
-	
-	public static function createBook($BookName,$autherName){
-				
-		return new book($BookName,$autherName);
-	}
+interface Notification {
+
+
+	public function send(string $to,string $message):void;
 }
 
 
-
-$book1=bookFactory::createBook("Agni", "Mosin");
-
-$book2=bookFactory::createBook("pankh", "Kalam");
+class SendSms implements Notification {
 
 
-echo $book1->getbook();
+	public function send(string $to,string $message):void{
 
-echo $book2->getbook();
+
+
+		echo "sending SMS to $to and SMS is $message <br>";
+	}
+
+
+}
+
+class SendEMail implements Notification {
+
+
+	public function send(string $to,string $message):void{
+
+
+
+		echo "sending Email to $to and Email is $message <br>";
+	}
+
+
+}
+
+
+class NotificationFactory{
+
+public static function initotification($type):Notification{
+
+	switch($type){
+		case "SMS":
+			return new SendSms();
+		case "EMail":
+			return new 	SendEMail();
+
+		default:
+		throw new Exception("This method is not available");	
+
+	}
+
+}
+
+}
+
+try{
+$email=NotificationFactory::initotification("EMail");
+
+
+$email->send("mosin@gmail.com","this is email");
+
+$sms=NotificationFactory::initotification("SMS");
+
+
+$sms->send("8600432414","this is sms");
+
+}
+catch (Exception $e)
+{
+	echo $e->getMessage();
+}
+
+
+
+?>
